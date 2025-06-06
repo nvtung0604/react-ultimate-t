@@ -1,5 +1,13 @@
+import './style.css'
+
 const MyComponent = () => {
-  return (<div>Tung hoc react library</div>);
+  return (
+    // Fragment
+    <>
+    <div className="">Tung hoc react library</div>
+    <div className="child">Fragment</div>
+    </>
+  );
 };
 
 export default MyComponent;

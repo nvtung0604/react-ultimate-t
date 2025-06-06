@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 // import ten from file_contain
 import MyComponent from './components/learn/MyComponent'
-import {SecondComponent, ThirdComponent } from './components/learn/SecondComponent'
+import { SecondComponent, ThirdComponent } from './components/learn/SecondComponent'
 
 
 const App = () => {
