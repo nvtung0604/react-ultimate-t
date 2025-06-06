@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.todo-app {
+    width: 500px;
+    min-height: 500px;
+    height: 100%;
+    margin: 50px auto;
+    border: 1px solid #000;
+}
+.todo-app__inner {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.todo-app__title {
+    margin-bottom: 10px;
+    font-size: 40px;
+    font-weight: 700;
+    color: orange;
+}
+.todo-app__input {
+    padding: 6px 20px;
+}
+.todo-app__btn {
+    padding: 6px 10px;
+    margin-left: 10px;
+}
+.tasks-list {
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    width: 80%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid #000;
+}
+.task-item {
+    padding-bottom: 7px;
+}
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
