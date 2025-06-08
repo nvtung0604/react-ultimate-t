@@ -10,10 +10,10 @@ const App = () => {
     address: "haiduong",
     country: "vietnam"
   };
-  const addNewtodo = (name) => {
-    alert(`call me ${name}`);
-  };
-  addNewtodo();
+  // const addNewtodo = (name) => {
+  //   alert(`call me ${name}`);
+  // };
+  // addNewtodo();
   return (
     <div className="todo-app">
       <div className="todo-app__inner">
@@ -21,7 +21,7 @@ const App = () => {
           To do list
         </h2>
         <TodoNew
-          addNewtodo = {addNewtodo}
+          
         />
        
         <TodoData
