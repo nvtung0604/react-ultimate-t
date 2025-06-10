@@ -18,10 +18,13 @@ const App = () => {
     address: "haiduong",
     country: "vietnam"
   };
-  // const addNewtodo = (name) => {
-  //   alert(`call me ${name}`);
-  // };
-  // addNewtodo();
+  const addNewtodo = (name) => {
+    const newTodo = {id: randomIntFromInterval(1, 10000000), name: name}
+    setTodoList([...todoList, newTodo])
+  };
+  const randomIntFromInterval = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
   return (
     <div className="todo-app">
       <div className="todo-app__inner">
@@ -29,7 +32,7 @@ const App = () => {
           To do list
         </h2>
         <TodoNew
-          
+          addNewtodo = {addNewtodo}
         />
        
         <TodoData
@@ -37,6 +40,7 @@ const App = () => {
           age = {age}
           data = {data}
           todoList = {todoList}
+          
         />
 
         <div className="todo-app__img-wrap">
