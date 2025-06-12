@@ -1,19 +1,16 @@
 const TodoData = (props) => {
-  // props is object variable
-  // object destructing
-  const {name, age, data} = props;
-  // c2: for beginner -> const name = props.name
-  // c3: lấy trực tiếp -> TodoData = ({name}) => {}
+    const { todoList } = props;
+
     return (
-        // Tasks
         <ul className="tasks-list">
-          <li className="task__item">My name {name}</li>
-          <li className="task-item">Learn react in one hours</li>
-          <li>
-            {JSON.stringify(props.todoList)}
-          </li>
+            {todoList && todoList.map((item, index) => (
+                <li className="task-item" key={index}>{item.name} <button>Delete</button></li>
+            ))}
+            <li>
+                {JSON.stringify(todoList)}
+            </li>
         </ul>
     );
-}
+};
 
 export default TodoData;

@@ -6,6 +6,7 @@ const TodoNew = (props) => {
   const [valueInput, setValueInput] = useState("tung")
   const handleClick = () => {
     addNewtodo(valueInput);
+    setValueInput("")
   }
   // event meaning?
   const handleOnChange = (name) => {
@@ -14,7 +15,7 @@ const TodoNew = (props) => {
   
     return (
         <form action="#!" className="todo-app__form">
-          <input type="text" name="" id="" className="todo-app__input" placeholder='Enter your task' onChange={(event) => handleOnChange(event.target.value)}/>
+          <input type="text" name="" id="" className="todo-app__input" placeholder='Enter your task' onChange={(event) => handleOnChange(event.target.value)} value={valueInput}/>
           <button className="todo-app__btn" onClick = {handleClick}>Add</button>
           
         </form>
