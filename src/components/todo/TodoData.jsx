@@ -6,9 +6,7 @@ const TodoData = (props) => {
             {todoList && todoList.map((item, index) => (
                 <li className="task-item" key={index}>{item.name} <button>Delete</button></li>
             ))}
-            <li>
-                {JSON.stringify(todoList)}
-            </li>
+            
         </ul>
     );
 };
