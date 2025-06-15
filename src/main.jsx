@@ -5,13 +5,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/login.jsx";
 import RegisterPage from "./pages/register.jsx";
 import UsersPage from "./pages/users.jsx";
-import ProductsPage from "./pages/products.jsx";
 import "./style/global.css";
 import TodoApp from "./components/todo/TodoApp.jsx";
+import ErrorPage from "./pages/error.jsx";
+import BookPage from "./pages/book.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
+        errorElement: <ErrorPage />,
         children: [
             { index: true, element: <TodoApp /> },
             {
@@ -19,8 +21,8 @@ const router = createBrowserRouter([
                 element: <UsersPage />,
             },
             {
-                path: "/products",
-                element: <ProductsPage />,
+                path: "/book",
+                element: <BookPage />,
             },
         ],
     },
