@@ -8,7 +8,7 @@ import UsersPage from "./pages/users.jsx";
 import "./style/global.css";
 import TodoApp from "./components/todo/TodoApp.jsx";
 import ErrorPage from "./pages/error.jsx";
-import BookPage from "./pages/book.jsx";
+import BookPage from "./pages/books.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
