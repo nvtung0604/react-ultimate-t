@@ -2,13 +2,21 @@ import { Divider, Flex } from "antd";
 import { Input } from "antd";
 import { Button } from "antd";
 import { useState } from "react";
-
+import axios from "axios";
 const UserForm = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
     const handleClickBtn = () => {
+        const URL_BACKEND = "http://localhost:8080/api/v1/user";
+        const data = {
+            fullName: fullName,
+            email: email,
+            password: password,
+            phone: phone,
+        };
+        axios.post(URL_BACKEND, data);
         console.log("check it", { fullName, email, password, phone });
     };
     return (
