@@ -1,11 +1,13 @@
 import { Space, Table, Tag } from "antd";
 import { fetchAllUserAPI } from "../../services/api-service";
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 const UserTable = () => {
-    const [dataUsers, setDataUsers] = useState([
-        { _id: "tung", fullName: 25, email: "haiduong" },
-    ]);
+    const [dataUsers, setDataUsers] = useState([]);
+    // empty array => just run one
+    useEffect(() => {
+        loadUser();
+    }, []);
     const columns = [
         {
             title: "Id",
@@ -22,11 +24,24 @@ const UserTable = () => {
     ];
 
     const loadUser = async () => {
-        const res = await fetchAllUserAPI;
-        // setDataUsers(res.data);
+        try {
+            const res = await fetchAllUserAPI();
+            console.log("Kết quả API:", res); // 👈 Kiểm tra
+
+            // Kiểm tra dữ liệu trả về là mảng không
+            if (Array.isArray(res.data)) {
+                setDataUsers(res.data);
+            } else {
+                console.error("❌ Dữ liệu không phải mảng:", res.data);
+                setDataUsers([]); // fallback để tránh Table lỗi
+            }
+        } catch (error) {
+            console.error("Lỗi khi gọi API:", error);
+            setDataUsers([]); // fallback
+        }
     };
-    loadUser();
-    return <Table columns={columns} dataSource={dataUsers} />;
+
+    return <Table columns={columns} dataSource={dataUsers} rowKey={"_id"} />;
 };
 
 export default UserTable;
