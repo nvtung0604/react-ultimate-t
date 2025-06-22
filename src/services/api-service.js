@@ -6,8 +6,14 @@ const createUserAPI = (fullName, email, password, phone) => {
     return axios.post(URL_BACKEND, data); // ✅ sửa lỗi
 };
 
-const updateUserAPI = () => {
-    // Chưa viết, để trống
+const updateUserAPI = (_id, fullName, phone) => {
+    const URL_BACKEND = "http://localhost:8080/api/v1/user";
+    const data = {
+        _id: _id,
+        fullName: fullName,
+        phone: phone,
+    };
+    return axios.put(URL_BACKEND, data);
 };
 
 const fetchAllUserAPI = () => {
