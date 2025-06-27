@@ -5,33 +5,36 @@ import { fetchAllUserAPI } from "../services/api-service";
 
 const UsersPage = () => {
     const [dataUsers, setDataUsers] = useState([]);
+    const [current, setCurrent] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [total, setTotal] = useState(0);
     // empty array => just run one
     useEffect(() => {
         loadUser();
-    }, []);
+    }, [current, pageSize]);
 
     const loadUser = async () => {
-        try {
-            const res = await fetchAllUserAPI();
-            console.log("Kết quả API:", res); // 👈 Kiểm tra
-
-            // Kiểm tra dữ liệu trả về là mảng không
-            if (Array.isArray(res.data)) {
-                setDataUsers(res.data);
-            } else {
-                console.error("❌ Dữ liệu không phải mảng:", res.data);
-                setDataUsers([]); // fallback để tránh Table lỗi
-            }
-        } catch (error) {
-            console.error("Lỗi khi gọi API:", error);
-            setDataUsers([]); // fallback
+        const res = await fetchAllUserAPI(current, pageSize);
+        if (res.data) {
+            setDataUsers(res.data.result);
+            setCurrent(res.data.meta.current);
+            setPageSize(res.data.meta.pageSize);
+            setTotal(res.data.meta.total);
         }
     };
     return (
         <div style={{ padding: "20px" }}>
             <div>
                 <UserForm loadUser={loadUser} />
-                <UserTable dataUsers={dataUsers} loadUser={loadUser} />
+                <UserTable
+                    dataUsers={dataUsers}
+                    loadUser={loadUser}
+                    current={current}
+                    pageSize={pageSize}
+                    total={total}
+                    setCurrent={setCurrent}
+                    setPageSize={setPageSize}
+                />
             </div>
         </div>
     );

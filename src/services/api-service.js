@@ -16,17 +16,10 @@ const updateUserAPI = (_id, fullName, phone) => {
     return axios.put(URL_BACKEND, data);
 };
 
-const fetchAllUserAPI = () => {
-    const URL_BACKEND = "http://localhost:8080/api/v1/user";
-    const data = {
-        fullName: "fullName",
-        email: "email",
-        password: "password",
-        phone: "phone",
-    };
-    return axios.get(URL_BACKEND, {
-        params: data, // ✅ dùng params thay vì body
-    });
+const fetchAllUserAPI = (current, pageSize) => {
+    const URL_BACKEND = `http://localhost:8080/api/v1/user?current=${current}&pageSize=${pageSize}`;
+
+    return axios.get(URL_BACKEND);
 };
 const deleteUserAPI = (id) => {
     const URL_BACKEND = `http://localhost:8080/api/v1/user/${id}`;
