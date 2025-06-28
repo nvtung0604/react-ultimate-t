@@ -3,6 +3,7 @@ import {
     UsergroupAddOutlined,
     HomeOutlined,
     BookOutlined,
+    SettingOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useState } from "react";
@@ -25,8 +26,23 @@ const Header = () => {
         },
         {
             label: <Link to={"/books"}>Books</Link>,
-            key: "products",
+            key: "books",
             icon: <BookOutlined />,
+        },
+        {
+            label: <Link to={"/books"}>Cài đặt</Link>,
+            icon: <SettingOutlined />,
+            children: [
+                {
+                    type: "group",
+                    children: [
+                        {
+                            label: <Link to={"/login"}>Đăng nhập</Link>,
+                        },
+                        { label: "Đăng xuất" },
+                    ],
+                },
+            ],
         },
     ];
     return (
