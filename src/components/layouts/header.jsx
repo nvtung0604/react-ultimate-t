@@ -7,8 +7,12 @@ import {
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useState } from "react";
+import { AuthContext } from "../context/auth-context";
 const Header = () => {
     const [current, setCurrent] = useState("mail");
+
+    const { user } = useContext(AuthContext);
+
     const onClick = (e) => {
         console.log("click ", e);
         setCurrent(e.key);

@@ -1,29 +1,24 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
-import {
-    Button,
-    Checkbox,
-    Form,
-    Input,
-    notification,
-    Row,
-    Col,
-    message,
-} from "antd";
-import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../components/context/auth-context";
+import { Button, Form, Input, notification, message } from "antd";
+import { Link } from "react-router-dom";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { loginAPI } from "../services/api-service";
 
 const LoginPage = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { setUser } = useContext(AuthContext);
+
     const onFinish = async (values) => {
         setLoading(true);
         // gọi API tốn thời gian => bất đồng bộ dùng async await
         const res = await loginAPI(values.email, values.password);
         if (res.data) {
             message.success("Đăng nhập thành công");
+            localStorage.setItem("access_token", res.data.access_token);
+            setUser(res.data.user);
             navigate("/");
         } else {
             notification.error({
