@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
     UsergroupAddOutlined,
     HomeOutlined,
@@ -6,16 +6,38 @@ import {
     LoginOutlined,
     AliwangwangOutlined,
 } from "@ant-design/icons";
-import { Menu } from "antd";
+import { Menu, message } from "antd";
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/auth-context";
+import { fetchAllUserAPI, logOutAPI } from "../../services/api-service";
 const Header = () => {
     const [current, setCurrent] = useState("mail");
 
-    const { user } = useContext(AuthContext);
+    const { user, setUser, setIsLoading } = useContext(AuthContext);
+    const navigate = useNavigate();
     const onClick = (e) => {
-        console.log("click ", e);
         setCurrent(e.key);
+        if (e.key == "logout") {
+            handleLogOut();
+        }
+    };
+
+    const handleLogOut = async () => {
+        const res = await logOutAPI();
+        if (res.data) {
+            localStorage.removeItem("access_token");
+            setUser({
+                email: "",
+                phone: "",
+                fullName: "",
+                role: "",
+                avatar: "",
+                id: "",
+            });
+            message.success("Logout success!");
+            // redirect to home
+            navigate("/");
+        }
     };
     const items = [
         {
@@ -50,7 +72,7 @@ const Header = () => {
                       icon: <AliwangwangOutlined />,
                       children: [
                           {
-                              label: <Link to={"/login"}>Đăng xuất</Link>,
+                              label: <span>Đăng xuất</span>,
                               key: "logout",
                           },
                       ],

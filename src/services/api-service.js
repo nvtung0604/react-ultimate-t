@@ -67,7 +67,13 @@ const loginAPI = (email, password) => {
 const getAccountAPI = () => {
     const URL_BACKEND = "http://localhost:8080/api/v1/auth/account";
 
-    return axios.get(URL_BACKEND); // ✅ sửa lỗi
+    return axios.get(URL_BACKEND);
+};
+
+const logOutAPI = () => {
+    const URL_BACKEND = "http://localhost:8080/api/v1/auth/logout";
+
+    return axios.post(URL_BACKEND);
 };
 
 export {
@@ -80,4 +86,5 @@ export {
     registerUserAPI,
     loginAPI,
     getAccountAPI,
+    logOutAPI,
 };
