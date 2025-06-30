@@ -2,10 +2,19 @@ import { useEffect, useState } from "react";
 import { notification, Space, Table, Tag } from "antd";
 import { getAllBooksAPI } from "../../services/api-service";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import CreatBooks from "./create-books";
 
 const BooksTable = (props) => {
-    const { dataBooks, current, pageSize, setCurrent, setPageSize, total } =
-        props;
+    const {
+        dataBooks,
+        current,
+        pageSize,
+        setCurrent,
+        setPageSize,
+        total,
+        setViewBooksOpen,
+        setViewDataBooks,
+    } = props;
     const columns = [
         {
             title: "STT",
@@ -17,7 +26,16 @@ const BooksTable = (props) => {
             title: "Id",
             dataIndex: "_id",
             key: "_id",
-            render: (_, record) => <a>{record._id}</a>,
+            render: (_, record) => (
+                <a
+                    onClick={() => {
+                        setViewDataBooks(record);
+                        setViewBooksOpen(true);
+                    }}
+                >
+                    {record._id}
+                </a>
+            ),
         },
         {
             title: "Tiêu đề",
@@ -62,6 +80,9 @@ const BooksTable = (props) => {
             price: item.price + " đ",
             quantity: item.quantity,
             author: item.author,
+            category: item.category,
+            sold: item.sold,
+            thumbnail: item.thumbnail,
         };
     });
 
@@ -80,6 +101,7 @@ const BooksTable = (props) => {
 
     return (
         <>
+            <CreatBooks />
             <Table
                 columns={columns}
                 dataSource={data}

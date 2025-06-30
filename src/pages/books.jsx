@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import BooksTable from "../components/books/books-table";
 import { getAllBooksAPI } from "../services/api-service";
 import { notification } from "antd";
+import ViewBooks from "../components/books/view-books";
 
 const BookPage = () => {
     const [dataBooks, setDataBooks] = useState([]);
     const [current, setCurrent] = useState(1);
     const [pageSize, setPageSize] = useState(5);
     const [total, setTotal] = useState(0);
-
+    const [viewBooksOpen, setViewBooksOpen] = useState(false);
+    const [viewDataBooks, setViewDataBooks] = useState([]);
     useEffect(() => {
         loadDataBooks();
     }, [current, pageSize]);
@@ -39,6 +41,14 @@ const BookPage = () => {
                 current={current}
                 pageSize={pageSize}
                 total={total}
+                setViewBooksOpen={setViewBooksOpen}
+                setViewDataBooks={setViewDataBooks}
+                loadDataBooks={loadDataBooks}
+            />
+            <ViewBooks
+                viewBooksOpen={viewBooksOpen}
+                setViewBooksOpen={setViewBooksOpen}
+                viewDataBooks={viewDataBooks}
             />
         </>
     );
