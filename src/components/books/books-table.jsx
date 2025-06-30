@@ -3,6 +3,7 @@ import { notification, Space, Table, Tag } from "antd";
 import { getAllBooksAPI } from "../../services/api-service";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CreatBooks from "./create-books";
+import CreateBookUnControll from "./create-book-uncontrol";
 
 const BooksTable = (props) => {
     const {
@@ -14,6 +15,7 @@ const BooksTable = (props) => {
         total,
         setViewBooksOpen,
         setViewDataBooks,
+        loadDataBooks,
     } = props;
     const columns = [
         {
@@ -101,7 +103,8 @@ const BooksTable = (props) => {
 
     return (
         <>
-            <CreatBooks />
+            <CreateBookUnControll loadDataBooks={loadDataBooks} />
+            <CreatBooks loadDataBooks={loadDataBooks} />
             <Table
                 columns={columns}
                 dataSource={data}
