@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { notification, Space, Table, Tag } from "antd";
-import { getAllBooksAPI } from "../../services/api-service";
+import { notification, Popconfirm, Space, Table, Tag } from "antd";
+import { deleteBookAPI, getAllBooksAPI } from "../../services/api-service";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CreatBooks from "./create-books";
 import CreateBookUnControll from "./create-book-uncontrol";
+import UpdateBooks from "./update-books";
+import UpdateBooksUncontrol from "./update-book-uncontrol";
 
 const BooksTable = (props) => {
     const {
@@ -17,6 +19,19 @@ const BooksTable = (props) => {
         setViewDataBooks,
         loadDataBooks,
     } = props;
+    const handleDelete = async (id) => {
+        const res = await deleteBookAPI(id);
+        if (res.data) {
+            notification.success({
+                message: "Delete Book",
+                description: "Xóa thành công",
+            });
+            loadDataBooks();
+        }
+    };
+    const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+    const [uncontrolModalOpen, setUnControlModalOpen] = useState(false);
+    const [dataDetail, setDataDetail] = useState({});
     const columns = [
         {
             title: "STT",
@@ -66,10 +81,28 @@ const BooksTable = (props) => {
             render: (_, record) => (
                 <Space size="middle">
                     <div style={{ color: "orange" }}>
-                        <EditOutlined />
+                        <EditOutlined
+                            onClick={() => {
+                                setUnControlModalOpen(true);
+                                setDataDetail(record);
+                            }}
+                        />
                     </div>
                     <div style={{ color: "red" }}>
-                        <DeleteOutlined />
+                        <Popconfirm
+                            title="Xóa người dùng"
+                            description="Bạn chắc chắn xóa user này?"
+                            onConfirm={() => {
+                                handleDelete(record._id);
+                            }}
+                            okText="Yes"
+                            cancelText="No"
+                            placement="left"
+                        >
+                            <DeleteOutlined
+                                style={{ cursor: "pointer", color: "red" }}
+                            />
+                        </Popconfirm>
                     </div>
                 </Space>
             ),
@@ -125,7 +158,20 @@ const BooksTable = (props) => {
                 }}
                 onChange={onChange}
             />
-            ;
+            {/* <UpdateBooks
+                isModalUpdateOpen={isModalUpdateOpen}
+                setIsModalUpdateOpen={setIsModalUpdateOpen}
+                dataDetail={dataDetail}
+                setDataDetail={setDataDetail}
+                loadDataBooks={loadDataBooks}
+            /> */}
+            <UpdateBooksUncontrol
+                uncontrolModalOpen={uncontrolModalOpen}
+                setUnControlModalOpen={setUnControlModalOpen}
+                loadDataBooks={loadDataBooks}
+                dataDetail={dataDetail}
+                setDataDetail={setDataDetail}
+            />
         </>
     );
 };

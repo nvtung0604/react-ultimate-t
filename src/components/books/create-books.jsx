@@ -25,8 +25,7 @@ const CreatBooks = (props) => {
             setPreview(URL.createObjectURL(file));
         }
     };
-    // console.log(preview);
-    // console.log(selectedFile);
+
     const handleChoiceThumbnailBook = async () => {
         const res = await handleUploadFile(selectedFile, "book");
         if (res.data) {
@@ -55,7 +54,6 @@ const CreatBooks = (props) => {
                 category,
                 thumbnail
             );
-            console.log(postBook);
             if (postBook.data) {
                 setIsModalOpen(false);
                 setSelectedFile(null);

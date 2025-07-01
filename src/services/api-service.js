@@ -100,6 +100,32 @@ const createBooksAPI = (
     };
     return axios.post(URL_BACKEND, data);
 };
+const updateBooksAPI = (
+    id,
+    thumbnail,
+    mainText,
+    author,
+    price,
+    quantity,
+    category
+) => {
+    const URL_BACKEND = `http://localhost:8080/api/v1/book/`;
+    const data = {
+        _id: id,
+        thumbnail: thumbnail,
+        mainText: mainText,
+        author: author,
+        price: price,
+        quantity: quantity,
+        category: category,
+    };
+    console.log("CHECK DATA", data);
+    return axios.put(URL_BACKEND, data);
+};
+const deleteBookAPI = (id) => {
+    const URL_BACKEND = `http://localhost:8080/api/v1/book/${id}`;
+    return axios.delete(URL_BACKEND);
+};
 export {
     createUserAPI,
     updateUserAPI,
@@ -113,4 +139,6 @@ export {
     logOutAPI,
     getAllBooksAPI,
     createBooksAPI,
+    updateBooksAPI,
+    deleteBookAPI,
 };

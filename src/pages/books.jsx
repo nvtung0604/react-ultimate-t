@@ -14,16 +14,18 @@ const BookPage = () => {
     useEffect(() => {
         loadDataBooks();
     }, [current, pageSize]);
+
+    const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
+
     const loadDataBooks = async () => {
         const result = await getAllBooksAPI(current, pageSize);
-        let count = 0;
         if (result.data.result) {
-            count++;
-            if (count === 1) {
+            if (!hasLoadedOnce) {
                 notification.success({
                     message: "Load books!",
                     description: "Tải dữ liệu books thành công!",
                 });
+                setHasLoadedOnce(true);
             }
 
             setDataBooks(result.data.result);
@@ -32,6 +34,7 @@ const BookPage = () => {
             setTotal(result.data.meta.total);
         }
     };
+
     return (
         <>
             <BooksTable
